@@ -81,6 +81,7 @@ jobs:
       - name: Acceder a la carpeta micro service
         run: |
           cd micro-service
+          cd tests
           ls -R
           npm install
           npm test
