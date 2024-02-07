@@ -47,13 +47,28 @@ jobs:
       #   with:
       #     name: dist-generate-code
       #     path: ${{inputs.path-base}}
-
       - name: Compile Generated Code
         run: |
           npm install
           npm test
           npm run coverage
         working-directory: ${{inputs.path-base}}/generator/${{inputs.service-name}}-service
+        if: success()
+        # Solo se ejecutara en caso de que todos los steps anteriores sean exitosos
+
+      - name: run Sonar
+        run: |
+          /opt/sonar-scanner/bin/sonar-scanner \
+          -Dsonar.projectKey=${{secrets.PROJECT_KEY}} \
+          -Dsonar.host.url=${{secrets.SONAR_HOST_URL}} \
+          -Dsonar.login=${{secrets.SONAR_TOKEN}} \
+          -Dsonar.sourceEncoding=UTF-8 \
+          -Dsonar.sources=src \
+          -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/*.module.ts,**/app.child.imports.ts,**/src/api/microRouter.ts,**/src/api/index.ts,**/src/config/**/*,**/src/to/**/*,**/src/facade/micro/index.ts \
+          -Dsonar.tests=src \
+          -Dsonar.test.inclusions=**/*.spec.ts \
+          -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
+        working-directory: generator/${{inputs.service-name}}-service
 
   # Test:
   #   needs: Build
