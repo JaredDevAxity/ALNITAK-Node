@@ -86,4 +86,4 @@ jobs:
           npm install
           npm test
           npm run coverage
-        working-directory: ./micro-service
+        working-directory: dist-generate-code/micro-service
