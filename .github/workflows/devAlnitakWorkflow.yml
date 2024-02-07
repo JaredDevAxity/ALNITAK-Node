@@ -2,7 +2,7 @@ name: Angular CI
 
 on:
   push:
-    branches: [ AR03_A_ALNITAK/feature/* , develop ]
+    branches: [AR03_A_ALNITAK/feature/*, develop]
 
 jobs:
   build:
@@ -17,12 +17,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      
+
       - name: Actualizar npm
         run: npm install -g npm@latest
-      
+
       - name: Install Yeoman
-        run: | 
+        run: |
           npm install -g yo generator-code yeoman-generator
           npm install
           npm link
@@ -31,7 +31,7 @@ jobs:
       - name: Generate code
         run: yo nodejs
         working-directory: generator
-      
+
       - name: compile generated code
         run: |
           npm install
@@ -51,4 +51,4 @@ jobs:
           -Dsonar.tests=src \
           -Dsonar.test.inclusions=**/*.spec.ts \
           -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
-        working-directory: generator/micro-service 
+        working-directory: generator/micro-service

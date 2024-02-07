@@ -1,0 +1,36 @@
+name: Solution ALNITAK
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        required: true
+        type: string
+      path-base:
+        required: true
+        type: string
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - name: Actualizar npm
+        if: ${{ inputs.node-version >= '20' }}
+        run: npm install -g npm@latest
+
+      - name: Install Yeoman
+        run: |
+          npm install -g yo generator-code yeoman-generator
+          npm install
+          npm link
+        working-directory: ${{ inputs.path-base }}/generator

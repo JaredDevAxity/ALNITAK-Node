@@ -1,0 +1,13 @@
+name: Workflow ALNITAK
+run-name: Flujo de trabajo ALNITAK
+
+on:
+  push:
+    branches: [alnitak]
+
+jobs:
+  ALNITAK:
+    uses: ./.github/workflows/ALNITAK-Node.yml
+    with:
+      node-version: "16"
+      path-base: "."
