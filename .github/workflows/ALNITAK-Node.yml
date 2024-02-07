@@ -10,8 +10,6 @@ on:
         required: true
         type: string
 
-
-
 jobs:
   Build:
     runs-on: ubuntu-latest
