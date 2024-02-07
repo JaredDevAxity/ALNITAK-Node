@@ -33,7 +33,7 @@ jobs:
           npm install -g yo generator-code yeoman-generator
           npm install
           npm link
-        working-directory: ${{ inputs.path-base }}/generator
+        working-directory: ${{ inputs.path-base }}
 
       # - name: Guardar caché (opcional)
       #   uses: actions/cache@v3
@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist-generate-code
-          path: ${{inputs.path-base}}/generator
+          path: ${{inputs.path-base}}
 
       # - name: compile generated code
       #   run: |
@@ -80,7 +80,8 @@ jobs:
 
       - name: Acceder a la carpeta micro service
         run: |
-          cd micro-service
+          dir
+          cd generator/micro-service
           dir 
           npm install
           npm test
