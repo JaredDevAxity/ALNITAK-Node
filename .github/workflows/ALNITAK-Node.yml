@@ -84,7 +84,7 @@ jobs:
           cd generator/micro-service
           dir 
           npm install
-          npm test
+          npx test
 
       # - name: compile generated code
       #   run: |
