@@ -64,7 +64,6 @@ jobs:
 
       - name: Run Sonar
         run: |
-          /opt/sonar-scanner/bin/sonar-scanner \
           -Dsonar.projectKey=Test_CREA_Sonar_Archernar \
           -Dsonar.host.url=https://devtools.axity.com/sonarlts \
           -Dsonar.login=sqp_62d48b60880f8f08933ee1c5fcaacb584c2f361e \
