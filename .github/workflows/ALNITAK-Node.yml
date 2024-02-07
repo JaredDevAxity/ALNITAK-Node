@@ -34,3 +34,7 @@ jobs:
           npm install
           npm link
         working-directory: ${{ inputs.path-base }}/generator
+
+      - name: Generate code
+        run: yo nodejs
+        working-directory: ${{ inputs.path-base }}/generator
