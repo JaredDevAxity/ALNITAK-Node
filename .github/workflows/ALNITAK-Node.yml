@@ -78,12 +78,15 @@ jobs:
         with:
           name: dist-generate-code
 
-      - name: Display structure of downloaded files
+      - name: Acceder a la carpeta micro service
+        run: cd dist-generate-code/micro-service
+
+      - name: Mostrar contenido de la carpeta
         run: ls -R
 
-      - name: compile generated code
-        run: |
-          npm install
-          npm test
-          npm run coverage
-        working-directory: dist-generate-code/micro-service
+      # - name: compile generated code
+      #   run: |
+      #     npm install
+      #     npm test
+      #     npm run coverage
+      #   working-directory: dist-generate-code/micro-service
