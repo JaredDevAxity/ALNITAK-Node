@@ -55,7 +55,6 @@ jobs:
   Test:
     needs: Build
     runs-on: ubuntu-latest
-    permissions: read-all
     steps:
       - name: Setup Node
         uses: actions/setup-node@v4
