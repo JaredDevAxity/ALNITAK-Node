@@ -12,3 +12,4 @@ jobs:
       node-version: "20"
       path-base: "."
       service-name: "micro"
+    secrets: inherit
