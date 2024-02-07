@@ -42,11 +42,12 @@ jobs:
         run: yo nodejs
         working-directory: ${{ inputs.path-base }}/generator
 
-      # - name: Archive Generate code
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: dist-generate-code
-      #     path: ${{inputs.path-base}}
+      - name: Archive Generate code
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-generate-code
+          path: ${{inputs.path-base}}/generator/micro-service
+
       - name: Compile Generated Code
         run: |
           npm install
@@ -55,6 +56,11 @@ jobs:
         working-directory: ${{inputs.path-base}}/generator/${{inputs.service-name}}-service
         if: success()
         # Solo se ejecutara en caso de que todos los steps anteriores sean exitosos
+
+      - name: Download Generate Code
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-generate-code
 
       - name: Run Sonar
         run: |
@@ -68,7 +74,6 @@ jobs:
           -Dsonar.tests=src \
           -Dsonar.test.inclusions=**/*.spec.ts \
           -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
-        working-directory: ${{inputs.path-base}}/generator/${{inputs.service-name}}-service
 
   # Test:
   #   needs: Build
