@@ -78,6 +78,9 @@ jobs:
         with:
           name: dist-generate-code
 
+      - name: Display structure of downloaded files
+        run: ls -R
+
       - name: compile generated code
         run: |
           npm install
