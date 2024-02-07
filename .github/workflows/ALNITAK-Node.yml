@@ -47,6 +47,12 @@ jobs:
         run: yo nodejs
         working-directory: ${{ inputs.path-base }}/generator
 
+      - name: Archive Generate code
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-generate-code
+          path: ${{inputs.path-base}}/generator/micro-service
+
   Test:
     needs: Build
     runs-on: ubuntu-latest
