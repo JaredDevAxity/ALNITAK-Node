@@ -57,9 +57,13 @@ jobs:
     needs: Build
     runs-on: ubuntu-latest
     steps:
+      - name: Download Generate Code
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-generate-code
+
       - name: compile generated code
         run: |
           npm install
           npm test
           npm run coverage
-        working-directory: ${{inputs.path-base}}/generator/micro-service
