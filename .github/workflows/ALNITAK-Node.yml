@@ -83,6 +83,7 @@ jobs:
           cd micro-service
           dir 
           npm install
+          npm test
 
       # - name: compile generated code
       #   run: |
