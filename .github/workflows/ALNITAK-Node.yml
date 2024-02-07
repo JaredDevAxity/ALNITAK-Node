@@ -14,7 +14,7 @@ on:
         type: string
 
 jobs:
-  Build:
+  Build-Test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -56,19 +56,19 @@ jobs:
         if: success()
         # Solo se ejecutara en caso de que todos los steps anteriores sean exitosos
 
-      - name: run Sonar
+      - name: Run Sonar
         run: |
           /opt/sonar-scanner/bin/sonar-scanner \
-          -Dsonar.projectKey=${{secrets.PROJECT_KEY}} \
-          -Dsonar.host.url=${{secrets.SONAR_HOST_URL}} \
-          -Dsonar.login=${{secrets.SONAR_TOKEN}} \
+          -Dsonar.projectKey=Test_CREA_Sonar_Archernar \
+          -Dsonar.host.url=https://devtools.axity.com/sonarlts \
+          -Dsonar.login=sqp_62d48b60880f8f08933ee1c5fcaacb584c2f361e \
           -Dsonar.sourceEncoding=UTF-8 \
           -Dsonar.sources=src \
           -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/*.module.ts,**/app.child.imports.ts,**/src/api/microRouter.ts,**/src/api/index.ts,**/src/config/**/*,**/src/to/**/*,**/src/facade/micro/index.ts \
           -Dsonar.tests=src \
           -Dsonar.test.inclusions=**/*.spec.ts \
           -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
-        working-directory: generator/${{inputs.service-name}}-service
+        working-directory: ${{inputs.path-base}}/generator/${{inputs.service-name}}-service
 
   # Test:
   #   needs: Build
