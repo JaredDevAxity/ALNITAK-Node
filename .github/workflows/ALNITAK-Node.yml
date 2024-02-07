@@ -35,13 +35,13 @@ jobs:
           npm link
         working-directory: ${{ inputs.path-base }}/generator
 
-      - name: Guardar caché (opcional)
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('${{inputs.path-base}}/generator/**/package-lock.json') }}
+      # - name: Guardar caché (opcional)
+      #   uses: actions/cache@v3
+      #   env:
+      #     cache-name: cache-node-modules
+      #   with:
+      #     path: ~/.npm
+      #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('${{inputs.path-base}}/generator/**/package-lock.json') }}
 
       - name: Generate code
         run: yo nodejs
@@ -79,7 +79,7 @@ jobs:
           name: dist-generate-code
 
       - name: Acceder a la carpeta micro service
-        run: cd dist-generate-code/micro-service
+        run: cd micro-service
 
       - name: Mostrar contenido de la carpeta
         run: ls -R
