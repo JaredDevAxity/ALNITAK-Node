@@ -31,7 +31,7 @@ jobs:
       - name: Install Yeoman
         run: |
           npm install -g yo generator-code yeoman-generator
-          npm install
+          npm install --save-dev
           npm link
         working-directory: ${{ inputs.path-base }}/generator
 
