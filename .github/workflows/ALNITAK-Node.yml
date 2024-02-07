@@ -53,6 +53,13 @@ jobs:
           name: dist-generate-code
           path: ${{inputs.path-base}}/generator/micro-service
 
+      - name: compile generated code
+        run: |
+          npm install
+          npm test
+          npm run coverage
+        working-directory: ${{inputs.path-base}}/generator/micro-service
+
   Test:
     needs: Build
     runs-on: ubuntu-latest
