@@ -57,24 +57,24 @@ jobs:
         if: success()
         # Solo se ejecutara en caso de que todos los steps anteriores sean exitosos
 
-      - name: Download Generate Code
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-generate-code
+      # - name: Download Generate Code
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: dist-generate-code
 
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         with:
-          projectBaseDir: ./
+          projectBaseDir: ${{inputs.path-base}}/generator/${{inputs.service-name}}-service
           args: >
             -Dsonar.projectKey=${{ secrets.PROJECT_KEY }}
             -Dsonar.sourceEncoding=UTF-8
             -Dsonar.sources=src 
-            -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/*.module.ts,**/app.child.imports.ts
+            -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/*.module.ts,**/app.child.imports.ts,**/src/api/microRouter.ts,**/src/api/index.ts,**/src/config/**/*,**/src/to/**/*,**/src/facade/micro/index.ts
             -Dsonar.tests=src
             -Dsonar.test.inclusions=**/*.spec.ts
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/*.module.ts,**/app.child.imports.ts,**/src/api/microRouter.ts,**/src/api/index.ts,**/src/config/**/*,**/src/to/**/*,**/src/facade/micro/index.ts
+
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
