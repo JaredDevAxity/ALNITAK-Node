@@ -31,18 +31,10 @@ jobs:
       - name: Install Yeoman
         run: |
           npm install -g yo generator-code yeoman-generator
-          npm install --save-dev
+          npm install 
           npm link
-        working-directory: ${{ inputs.path-base }}/generator
-
-      # - name: Guardar caché (opcional)
-      #   uses: actions/cache@v3
-      #   env:
-      #     cache-name: cache-node-modules
-      #   with:
-      #     path: ~/.npm
-      #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('${{inputs.path-base}}/generator/**/package-lock.json') }}
-
+        working-directory: ${{ inputs.path-base }}/generato
+        
       - name: Generate code
         run: yo nodejs
         working-directory: ${{ inputs.path-base }}/generator
@@ -83,7 +75,7 @@ jobs:
           dir
           cd generator/micro-service
           dir 
-          npm install
+          npm install --save-dev
           npm run test
 
       # - name: compile generated code
