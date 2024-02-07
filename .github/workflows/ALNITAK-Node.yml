@@ -33,7 +33,7 @@ jobs:
           npm install -g yo generator-code yeoman-generator
           npm install
           npm link
-        working-directory: ${{ inputs.path-base }}
+        working-directory: ${{ inputs.path-base }}/generator
 
       # - name: Guardar caché (opcional)
       #   uses: actions/cache@v3
