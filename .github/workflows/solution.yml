@@ -7,7 +7,7 @@ on:
 
 jobs:
   ALNITAK:
-    uses: ./.github/workflows/ALNITAK-Node.yml
+    uses: JaredDevAxity/AR_26_A_ARCHERNAR_ACTIONS/.github/workflows/ALNITAK_Node.yml@main
     with:
       node-version: "20"
       path-base: "."
