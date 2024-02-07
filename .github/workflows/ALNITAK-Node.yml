@@ -46,3 +46,14 @@ jobs:
       - name: Generate code
         run: yo nodejs
         working-directory: ${{ inputs.path-base }}/generator
+
+  Test:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: compile generated code
+        run: |
+          npm install
+          npm test
+          npm run coverage
+        working-directory: ${{inputs.path-base}}/generator/micro-service
