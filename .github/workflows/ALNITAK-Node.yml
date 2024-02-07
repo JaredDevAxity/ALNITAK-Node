@@ -9,6 +9,9 @@ on:
       path-base:
         required: true
         type: string
+      service-name:
+        required: true
+        type: string
 
 jobs:
   Build:
@@ -34,7 +37,7 @@ jobs:
           npm install 
           npm link
         working-directory: ${{ inputs.path-base }}/generator
-        
+
       - name: Generate code
         run: yo nodejs
         working-directory: ${{ inputs.path-base }}/generator
@@ -60,7 +63,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -70,22 +73,14 @@ jobs:
         if: ${{ inputs.node-version >= '20' }}
         run: npm install -g npm@latest
 
-      - name: Download Generate Code
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-generate-code
+      # - name: Download Generate Code
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: dist-generate-code
 
-      - name: Acceder a la carpeta micro service
+      - name: Compile Generated Code
         run: |
-          dir
-          cd generator/micro-service
-          dir 
-          npm install --save-dev
-          npm run test
-
-      # - name: compile generated code
-      #   run: |
-      #     npm install
-      #     npm test
-      #     npm run coverage
-      #   working-directory: dist-generate-code/micro-service
+          npm install
+          npm test
+          npm run coverage
+        working-directory: ${{inputs.path-base}}/generator/${{inputs.service-name}}-service
